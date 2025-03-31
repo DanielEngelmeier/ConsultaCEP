@@ -3,18 +3,8 @@ package br.com.danielcompany.consultacep.principal;
 import br.com.danielcompany.consultacep.api.ApiService;
 import br.com.danielcompany.consultacep.file.FileWriter;
 import br.com.danielcompany.consultacep.modelos.Endereco;
-//lib importada com o .jar conforme mostrado no curso deste desafio
 import br.com.danielcompany.consultacep.modelos.EnderecoViaCep;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import javax.swing.*;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,9 +18,7 @@ public class Main {
         List<Endereco> enderecos = new ArrayList<>();
         FileWriter fileWriter = new FileWriter();
         //instanciando a formatação da saída
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+
 
         while(!cep.equalsIgnoreCase("sair")){
 
@@ -42,10 +30,7 @@ public class Main {
             }
 
             try {
-                String json = apiService.buscarCep(cep);
-
-                EnderecoViaCep enderecoViaCep = gson.fromJson(json, EnderecoViaCep.class);
-
+                EnderecoViaCep enderecoViaCep = apiService.buscarCep(cep);
                 Endereco novoEndereco = new Endereco(enderecoViaCep);
 
                 enderecos.add(novoEndereco);
@@ -56,7 +41,7 @@ public class Main {
             }
 
         }
-        fileWriter.escreverLog("enderecosAdicionados.json", gson.toJson(enderecos));
+        fileWriter.escreverLog("enderecosAdicionados.json", enderecos);
 
     }
 }
