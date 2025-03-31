@@ -7,6 +7,22 @@ public class Endereco {
     private String cidade;
     private String uf;
 
+    public Endereco(String cep, String logradouro, String bairro, String cidade, String uf) {
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+
+    public Endereco(EnderecoViaCep enderecoViaCep) {
+        this.cep = enderecoViaCep.cep();
+        this.logradouro = enderecoViaCep.logradouro();
+        this.bairro = enderecoViaCep.bairro();
+        this.cidade = enderecoViaCep.localidade();
+        this.uf = enderecoViaCep.uf();
+    }
+
     public String getCep() {
         return cep;
     }
@@ -46,4 +62,5 @@ public class Endereco {
     public void setUf(String uf) {
         this.uf = uf;
     }
+
 }

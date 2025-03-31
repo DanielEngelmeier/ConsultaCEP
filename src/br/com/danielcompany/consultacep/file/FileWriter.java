@@ -1,6 +1,15 @@
 package br.com.danielcompany.consultacep.file;
 
+import java.io.IOException;
+
 public class FileWriter {
-    //TODO ideia para organizar melhor o codigo removendo
-    // excesso de codigo na main melhorando a visibilidade
+    public void escreverLog(String nomeArquivo, String mensagem){
+        try {
+            java.io.FileWriter log = new java.io.FileWriter(nomeArquivo);
+            log.write(mensagem);
+            log.close();
+        } catch (IOException e) {
+            System.out.println("Erro ao criar o log: " + e.getMessage());
+        }
+    }
 }
